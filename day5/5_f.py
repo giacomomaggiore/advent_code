@@ -96,18 +96,34 @@ def second_part(path:str):
         fromm.append(x[3])
         to.append(x[5])
 
-    print(col)
-
     for i in range(len(how_many)):
         x = int(how_many[i])
         a = int(fromm[i])
         b = int(to[i])
 
-        pass
+        var:list = col[a][-x:]
+
+        for j in var:
+            col[b].append(j)
+        
+        for s in range(x):
+            col[a].pop()
+    
+    res = ""
+    for k in col:
+        k.reverse()
+        if len(k)>0:
+            res = res+ k[0]
+    
+    print("\n\n\n\n"+ res)
+
+
+        
 
 
 
 
 
 
-first_part("input_f.txt")
+
+second_part("input_f.txt")
