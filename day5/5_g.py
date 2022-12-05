@@ -59,6 +59,19 @@ for comando in comandi:
 	#print(comando)
 	#print(comando[-2]) #ultimo numero
 
+
+def elimina(colonne): 
+	for colonna in colonne:
+		print(colonna)
+
+		i = len(colonna) -1
+		while i >= 0:
+			if colonna[i] == " ":
+				colonna.pop(i)
+			i = i -1
+elimina(colonne)
+print(colonne)
+
 def trova_ultimo(lista:list):
 	i = len(lista)-1
 	
@@ -69,26 +82,22 @@ def trova_ultimo(lista:list):
 			i = i - 1
 
 def sposta(colonna1, colonna2):
-	#print("Sono nello SPOSTA\n")
-	indice_ultimo = trova_ultimo(colonna2)
-	print(indice_ultimo)
-	try:
-		#print(colonna1[trova_ultimo(colonna1)])
-		colonna2[indice_ultimo+1] = colonna1[trova_ultimo(colonna1)]
-		#print(colonna2[indice_ultimo+1])
-
-	except:
-		colonna2.append(colonna1[trova_ultimo(colonna1)])
-
+	temp = len(colonna1)-1
+	print(colonna1, temp)
+	
+	colonna2.append(colonna1[temp])
+	colonna1.pop(temp)
 	
 for istruzione in comandi_lista:
 	#print(istruzione)
-
-	#print(istruzione[1], istruzione[2])
-	print("ciao")
-	#print(colonne[istruzione[1]-1], colonne[istruzione[2]-1])
-	sposta(colonne[istruzione[1]-1], colonne[istruzione[2]-1])
-	#print(colonne)
+	for volte in range(istruzione[0]):
+		a = istruzione[1]-1
+		b = istruzione[2]-1
+		#print(a,b)
+		#print(istruzione[1], istruzione[2])
+		#print(colonne[a], colonne[b])
+		sposta(colonne[a], colonne[b])
+		#print(colonne)
 
 def trova_ultimo_2(lista:list):
 	i = len(lista)-1
