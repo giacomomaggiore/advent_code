@@ -62,7 +62,7 @@ for comando in comandi:
 
 def elimina(colonne): 
 	for colonna in colonne:
-		print(colonna)
+		#print(colonna)
 
 		i = len(colonna) -1
 		while i >= 0:
@@ -83,22 +83,37 @@ def trova_ultimo(lista:list):
 
 def sposta(colonna1, colonna2):
 	temp = len(colonna1)-1
-	print(colonna1, temp)
+	#print(colonna1, temp)
 	
 	colonna2.append(colonna1[temp])
 	colonna1.pop(temp)
+
+def sposta_due(colonna1, colonna2, n):
+	#print("colonna1")
+	#print(colonna1)
+	#print(colonna1)
+	#temp = []
+	#print(len(colonna1)-n-1, len(colonna1)-1)
+	temp = colonna1[-n:]
+	#print(n, temp)
 	
+	for x in temp:
+		colonna2.append(x)
+		print(colonna2)
+		colonna1.pop(len(colonna1)-1)	
+
+
+print(colonne)
 for istruzione in comandi_lista:
 	#print(istruzione)
-	for volte in range(istruzione[0]):
-		a = istruzione[1]-1
-		b = istruzione[2]-1
-		#print(a,b)
-		#print(istruzione[1], istruzione[2])
-		#print(colonne[a], colonne[b])
-		sposta(colonne[a], colonne[b])
-		#print(colonne)
-
+	
+	a = istruzione[1]-1
+	b = istruzione[2]-1
+	c = istruzione[0]
+	
+	print(a,b,c)
+	sposta_due(colonne[a],colonne[b],c)
+		
 def trova_ultimo_2(lista:list):
 	i = len(lista)-1
 	#print(lista[0])
