@@ -1,7 +1,9 @@
 file = open("day7\input_g.txt")
 lista_comandi:list = file.readlines()
 lista_comandi_reverse = lista_comandi.reverse()
-
+for line in lista_comandi:
+    if "ls" in line:
+        lista_comandi.remove(line)
 
 
 class Tree:
@@ -28,11 +30,9 @@ def cd(Current, nome):
 
 for line in lista_comandi:
     if "dir" in line:
-        pass
+        aggiungi("nome")
     elif "cd" in line:
-        pass
-    elif "ls" in line:
-        pass
-    else:
-        pass
-
+        cd(current, "nome")
+    elif "ls" in line and "dir" not in line:
+        file(current, 34)
+   
