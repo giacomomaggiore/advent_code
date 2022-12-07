@@ -30,9 +30,15 @@ def cd(Current, nome):
 
 for line in lista_comandi:
     if "dir" in line:
-        aggiungi("nome")
+        nome = line[5:]
+        aggiungi(nome)
+
     elif "cd" in line:
-        cd(current, "nome")
-    elif "ls" in line and "dir" not in line:
-        file(current, 34)
+        nome = line[3:]
+        cd(current, nome)
+
+    elif "ls" not in line and "dir" not in line:
+        nome = line.split(" ", 1)[0]
+        numero = int(nome)
+        file(current, numero)
    
