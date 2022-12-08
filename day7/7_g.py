@@ -1,9 +1,9 @@
-file = open("day7\input_g.txt")
+file = open("input_g.txt")
 lista_comandi:list = file.readlines()
-lista_comandi_reverse = lista_comandi.reverse()
 for line in lista_comandi:
     if "ls" in line:
-        lista_comandi.remove(line)
+        print("eliminato")
+        lista_comandi.pop(lista_comandi.index(line))
 
 
 class Tree:
@@ -23,7 +23,7 @@ def aggiungi(Parent, nome):
 
 def file(Current, file):
     Current.data = Current.data + file
-    print(Current.data)
+    #print(Current.data)
 
 def cd(Current, nome):
     for sottocartelle in Current.children:
@@ -33,11 +33,11 @@ def cd(Current, nome):
 def calcola(Directory):
     dimensione = 0
     if len(Directory.children) == 0:
-        print("vuoto")
+        #print("vuoto")
         dimensione = Directory.data
         #print(dimensione)
     else:
-        print("Non vuoto")
+        #print("Non vuoto")
         for sottocartelle in  Directory.children:
         
             dimensione = dimensione + calcola(sottocartelle)
@@ -48,18 +48,23 @@ def calcola(Directory):
 
 for line in lista_comandi:
     if "dir" in line:
+        print("sto facendo una nuova dir\n")
         nome = line[5:]
         aggiungi(current,nome)
 
     elif "cd" in line:
+        print("Cambiando directory\n")
         nome = line[5:]
         aggiungi(current, nome)
         cd(current, nome)
 
     elif "ls" not in line and "dir" not in line:
+        
         nome = line.split(" ", 1)[0]
+        print("creando il file ", nome, "\n")
         numero = int(nome)
-        #print(nome)
+        #print(numero)
         file(current, numero)
+    else:
+        print(line)
    
-print(calcola(dir))
