@@ -1,39 +1,31 @@
-file = open("input_g.txt")
+file = open("day7\input_g.txt")
 lista_comandi:list = file.readlines()
 for line in lista_comandi:
     if "ls" in line:
-        print("eliminato")
         lista_comandi.pop(lista_comandi.index(line))
 
 
-class Tree:
+class Tree():
     def __init__(self, nome):
         self.name = nome
         self.children = []
-        self.data = 0 
+        self.data = 0
 
-dir = Tree("root")
+    def dir(self, nome):
+        cartella = Tree(nome)
+        self.children.append(cartella)
+    
+    def file(self, numero):
+        self.data = self.data + numero
+
+dir = Tree("Root")
 current = dir
-
-def aggiungi(Parent, nome):
-    temp = Tree(nome)
-    temp.name = nome
-
-    Parent.children.append(temp)
-
-def file(Current, file):
-    Current.data = Current.data + file
-    #print(Current.data)
-
-def cd(Current, nome):
-    for sottocartelle in Current.children:
-        if sottocartelle.name == nome:
-            temp = sottocartelle
-
+totale = 0
+    
 def calcola(Directory):
     dimensione = 0
-    if len(Directory.children) == 0:
-        #print("vuoto")
+    if not Directory.children:
+        print("vuoto")
         dimensione = Directory.data
         #print(dimensione)
     else:
@@ -41,22 +33,28 @@ def calcola(Directory):
         for sottocartelle in  Directory.children:
         
             dimensione = dimensione + calcola(sottocartelle)
-        
     
+    print(dimensione)
     return dimensione
+    
+    
     
 
 for line in lista_comandi:
     if "dir" in line:
-        print("sto facendo una nuova dir\n")
         nome = line[5:]
-        aggiungi(current,nome)
+        print("Creando cartella ", nome, " nella directory ", current.name)
+
+        current.dir(nome)
 
     elif "cd" in line:
-        print("Cambiando directory\n")
+        
         nome = line[5:]
-        aggiungi(current, nome)
-        cd(current, nome)
+        
+        
+        for cartelle in current.children:
+            if cartelle.name == nome:
+                current = cartelle
 
     elif "ls" not in line and "dir" not in line:
         
@@ -64,7 +62,25 @@ for line in lista_comandi:
         print("creando il file ", nome, "\n")
         numero = int(nome)
         #print(numero)
-        file(current, numero)
+        current.file(numero)
     else:
         print(line)
-   
+
+totale = 0
+
+def somma_dimensioni(Directory):
+    global totale
+    for cartelle in Directory.children:
+        if calcola(cartelle) >= 10000:
+            totale = totale + calcola(cartelle)
+            print(totale)
+            somma_dimensioni(Directory)
+    
+
+    return totale
+        
+        
+
+
+calcola(dir)
+somma_dimensioni(dir)
